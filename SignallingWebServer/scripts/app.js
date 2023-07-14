@@ -50,7 +50,7 @@ let inputController = null;
 let autoPlayAudio = true;
 let qualityController = false;
 let qualityControlOwnershipCheckBox;
-let matchViewportResolution;
+let matchViewportResolution = true;
 let VideoEncoderQP = "N/A";
 // TODO: Remove this - workaround because of bug causing UE to crash when switching resolutions too quickly
 let lastTimeResized = new Date().getTime();
@@ -991,14 +991,14 @@ function setOverlay(htmlClass, htmlElement, onClickFunction) {
 }
 
 function showConnectOverlay() {
-    let startText = document.createElement('div');
-    startText.id = 'playButton';
-    startText.innerHTML = 'Click to start'.toUpperCase();
+    //let startText = document.createElement('div');
+    //startText.id = 'playButton';
+    //startText.innerHTML = 'Click to start'.toUpperCase();
 
-    setOverlay('clickableState', startText, event => {
+    //setOverlay('clickableState', startText, event => {
         connect();
         startAfkWarningTimer();
-    });
+    //});
 }
 
 function showTextOverlay(text) {
@@ -2755,6 +2755,7 @@ function load() {
     populateDefaultProtocol();
     setupFreezeFrameOverlay();
     registerKeyboardEvents();
+	updateVideoStreamSize();
     // Example response event listener that logs to console
     addResponseEventListener('logListener', (response) => {console.log(`Received response message from streamer: "${response}"`)})
     start(false);
